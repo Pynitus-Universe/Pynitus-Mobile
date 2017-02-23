@@ -1,0 +1,19 @@
+{
+  "name": "pynitus-mobile",
+  "description": "Mobile frontend for github.com/Pynitus-Universe/Pynitus.",
+  "main": "",
+  "authors": [
+    "Pynitus Universe",
+    "Philipp Reusch <philipp.reusch@skipnet.de>"
+  ],
+  "license": "AGPLv3",
+  "homepage": "https://github.com/Pynitus-Universe/Pynitus-Mobile",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
