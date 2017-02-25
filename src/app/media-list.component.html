@@ -1,6 +1,6 @@
 <div *ngFor="let item of list">
 <div class="track">
-  <a class="detail" href="#track">
+  <a class="detail" (click)="onMainClick(item.id)">
     <div class="album-cover">
       <img src="{{item.img}}" alt="...">
     </div>
@@ -9,7 +9,7 @@
       <div class="artist">{{item.subtitle}}</div>
     </div>
   </a>
-  <a class="enqueue" href="#enqueue">
+  <a class="enqueue" (click)="onActionClick(item.id)">
     <span class="fa-stack">
       <i class="fa fa-circle fa-stack-2x"></i>
       <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
