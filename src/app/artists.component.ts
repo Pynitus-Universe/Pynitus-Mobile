@@ -1,31 +1,31 @@
 import { Component } from '@angular/core';
-import { MediaListItem } from './media-list.component';
+import { Artist, MediaListItem } from './models';
+import { ArtistService } from './artist.service';
 
 @Component({
   templateUrl: './app/artists.component.html',
+  providers: [ ArtistService ],
 })
 
 export class ArtistsComponent  {
-  list: MediaListItem[] = [
-    {
-      id: 1,
-      title: 'Rammstein',
-      subtitle: '3 Albums, 10 Tracks',
-      img: 'covers/rammstein-rosenrot.jpg'
-    },
-    {
-      id: 2,
-      title: 'Shinedown',
-      subtitle: '1 Album, 2 Tracks',
-      img: 'covers/shinedown-second_chance.png'
-    },
-    {
-      id: 3,
-      title: 'Slipknot',
-      subtitle: '1 Album, 1 Track',
-      img: 'covers/slipknot-wait_and_bleed.jpg'
-    }
-  ];
+  constructor(private artistService: ArtistService) {}
+
+  list: MediaListItem[] = [];
+
+  ngOnInit(): void {
+    this.artistService.getArtistsSlowly().then((artists: Artist[]) => {
+      for(var key in artists) {
+        var artist = artists[key];
+
+        this.list.push({
+          id: artist.id,
+          title: artist.name,
+          subtitle: '? Albums, ? Tracks',
+          img: 'covers/album-placeholder.png',
+        });
+      }
+    });
+  }
 
   onNotifyMainClick(id:number):void {
     // Navigate to album detail view

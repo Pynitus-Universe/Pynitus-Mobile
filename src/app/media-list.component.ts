@@ -1,11 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-export class MediaListItem {
-  id: number;
-  title: string;
-  subtitle: string;
-  img: string;
-}
+import { MediaListItem } from './models';
 
 @Component({
   selector: 'media-list',

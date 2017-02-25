@@ -1,49 +1,31 @@
-import { Component } from '@angular/core';
-import { MediaListItem } from './media-list.component';
+import { Component, OnInit } from '@angular/core';
+import { Track, MediaListItem } from './models';
+import { TrackService } from './track.service';
 
 @Component({
   templateUrl: './app/tracks.component.html',
+  providers: [ TrackService ],
 })
 
-export class TracksComponent  {
-  list: MediaListItem[] = [
-    {
-      id: 1,
-      title: 'Benzin',
-      subtitle: 'Rosenrot',
-      img: 'covers/rammstein-rosenrot.jpg'
-    },
-    {
-      id: 2,
-      title: 'Mann gegen Mann',
-      subtitle: 'Rosenrot',
-      img: 'covers/rammstein-rosenrot.jpg'
-    },
-    {
-      id: 3,
-      title: 'Rosenrot',
-      subtitle: 'Rosenrot',
-      img: 'covers/rammstein-rosenrot.jpg'
-    },
-    {
-      id: 4,
-      title: 'Second Chance',
-      subtitle: 'Shinedown',
-      img: 'covers/shinedown-second_chance.png'
-    },
-    {
-      id: 5,
-      title: 'The Sound of Madness',
-      subtitle: 'Shinedown',
-      img: 'covers/shinedown-second_chance.png'
-    },
-    {
-      id: 6,
-      title: 'Wait and Bleed',
-      subtitle: 'Slipknot',
-      img: 'covers/slipknot-wait_and_bleed.jpg'
-    }
-  ];
+export class TracksComponent implements OnInit  {
+  constructor(private trackService: TrackService) {}
+
+  list: MediaListItem[] = [];
+
+  ngOnInit(): void {
+    this.trackService.getTracksSlowly().then((tracks: Track[]) => {
+      for(var key in tracks) {
+        var track = tracks[key];
+
+        this.list.push({
+          id: track.id,
+          title: track.title,
+          subtitle: track.album.artist.name,
+          img: track.album.cover,
+        });
+      }
+    });
+  }
 
   onNotifyMainClick(id:number):void {
     // Navigate to track detail view
