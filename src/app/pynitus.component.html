@@ -1,5 +1,40 @@
-<a routerLink="/artists">Artists</a>
-<a routerLink="/albums">Albums</a>
-<a routerLink="/tracks">Tracks</a>
-<br /><player></player><br />
-<router-outlet></router-outlet>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+
+      <button type="button" class="navbar-toggle-left navbar-toggle" (click)="togglePlayerCollapse()" aria-expanded="false" aria-controls="navbar">
+        <i class="fa fa-play fa-lg" aria-hidden="true" title="Toggle player"></i>
+        <span class="sr-only">Toggle player</span>
+      </button>
+
+      <a class="navbar-brand" href="#">{{heading}}</a>
+
+      <button type="button" class="navbar-toggle" (click)="toggleNavigationCollapse()" aria-expanded="false" aria-controls="navbar">
+        <i class="fa fa-bars fa-lg" aria-hidden="true" title="Toggle navigation"></i>
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+
+    </div>
+
+    <div id="player" class="navbar-collapse" [ngClass]="{'collapse': isPlayerCollapsed}">
+      <player></player>
+    </div><!--/#player -->
+
+    <div id="navbar" class="navbar-collapse" [ngClass]="{'collapse': isNavigationCollapsed}">
+      <ul class="nav navbar-nav">
+        <li routerLinkActive="active"><a routerLink="/artists" (click)="toggleNavigationCollapse()">Artists</a></li>
+        <li routerLinkActive="active"><a routerLink="/albums" (click)="toggleNavigationCollapse()">Albums</a></li>
+        <li routerLinkActive="active"><a routerLink="/tracks" (click)="toggleNavigationCollapse()">Tracks</a></li>
+        <li routerLinkActive="active"><a routerLink="/upload" (click)="toggleNavigationCollapse()">Upload</a></li>
+      </ul>
+    </div><!--/#navbar -->
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div><!-- /.container -->

@@ -1,5 +1,163 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i|Ubuntu:400,400i,700,700i');
+
+body {
+  padding-top: 5rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+button.navbar-toggle {
+  width: 40px;
+  height: 40px;
+}
+
+button[data-target="#player"] {
+    background-image: url(shinedown-second_chance.png);
+    background-size: 40px;
+    background-repeat: no-repeat;
+}
+
+.content {
+  padding: 3rem 1.5rem;
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+    margin-top: 3px;
+}
+
+.navbar-toggle {
+  z-index: 3;
+  color: #E8E8E8;
+}
+
+.navbar-toggle-left {
+  margin-left: 15px;
+  margin-right: 0;
+  float: left !important;
+}
+
+#player {
+  color: #E8E8E8;
+  padding: 1.5rem;
+}
+
+#player .heading {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.playing-heading {
+  margin: 0 0 8px 0;
+}
+
+.queue-heading {
+  margin: 10px 0 8px 0;
+  border-top: 1px solid #AAA;
+  padding: 10px 0 0 0;
+}
+
+.queue-heading .heading {
+  padding: 2px 0 0 0;
+}
+
+.player-album-cover .media-object {
+  width: 64px;
+  height: 64px;
+}
+
+hr.track-divider {
+  margin: 5px 0;
+}
+
+#player hr.track-divider {
+  border-color: #444;
+}
+
+.track {
+  position: relative;
+
+  height: 58px;
+}
+
+.track a.detail {
+  display: block;
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 38px;
+}
+
+.track .album-cover {
+  float: left;
+
+  padding: 5px;
+}
+
+.track .album-cover img {
+  width: 48px;
+  height: 48px;
+
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+
+#player .track .album-cover img {
+  width: 48px;
+  height: 48px;
+
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(255,255,255,0.5);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(255,255,255,0.5);
+  box-shadow: 0px 0px 5px 0px rgba(255,255,255,0.5);
+}
+
+.track .info {
+  float: left;
+  padding: 8px 10px;
+  color: black;
+}
+
+#player .track .info {
+  color: #E8E8E8;
+}
+
+.track .info .title {
+  font-size: 18px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.track .info .artist {
+  font-size: 12px;
+}
+
+.track a.enqueue,
+.track a.dequeue  {
+  display: block;
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  height: 58px;
+  padding: 15px 5px;
+}
+
+.track a.enqueue {
+  color: #749C75;
+}
+
+.track a.dequeue {
+  color: #CE4458;
+}
+
+.queue-heading .vote-next {
+  float: right;
 }
