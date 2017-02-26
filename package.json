@@ -1,7 +1,7 @@
 {
-  "name": "angular-quickstart",
-  "version": "1.0.0",
-  "description": "QuickStart package.json from the documentation, supplemented with testing support",
+  "name": "pynitus-mobile",
+  "version": "0.1.0",
+  "description": "Default package.json from angular-quickstart",
   "scripts": {
     "build": "tsc -p src/",
     "build:watch": "tsc -p src/ -w",
