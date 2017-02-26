@@ -1,30 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
 
-import { Artist } from './models';
+import 'rxjs/add/operator/toPromise';
+
+import { Artist, APIArtist, artistsFromApiResponse } from './models';
 
 @Injectable()
 export class ArtistService {
+  constructor(private http: Http) {};
+
+  private artistsUrl = 'http://127.0.0.1:5000/artists/all';
+
   getArtists(): Promise<Artist[]> {
-    return Promise.resolve([
-      {
-        id: 1,
-        name: 'Rammstein'
-      },
-      {
-        id: 2,
-        name: 'Shinedown'
-      },
-      {
-        id: 3,
-        name: 'Slipknot'
-      },
-    ]);
+    return this.http.get(this.artistsUrl)
+                    .toPromise()
+                    .then(response => artistsFromApiResponse(response.json() as APIArtist[]))
+                    .catch(this.handleError);
   }
 
-  getArtistsSlowly(): Promise<Artist[]> {
-    return new Promise(resolve => {
-      // Simulate server latency with 2 second delay
-      setTimeout(() => resolve(this.getArtists()), 500);
-    });
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

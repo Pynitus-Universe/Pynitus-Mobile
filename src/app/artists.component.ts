@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Artist, MediaListItem } from './models';
+import { Artist, MediaListItem, asMediaListItems } from './models';
 import { ArtistService } from './artist.service';
 
 @Component({
@@ -13,18 +13,8 @@ export class ArtistsComponent  {
   list: MediaListItem[] = [];
 
   ngOnInit(): void {
-    this.artistService.getArtistsSlowly().then((artists: Artist[]) => {
-      for(var key in artists) {
-        var artist = artists[key];
-
-        this.list.push({
-          id: artist.id,
-          title: artist.name,
-          subtitle: '? Albums, ? Tracks',
-          img: 'covers/album-placeholder.png',
-        });
-      }
-    });
+    this.artistService.getArtists()
+      .then((artists: Artist[]) => this.list = asMediaListItems(artists));
   }
 
   onNotifyMainClick(id:number):void {

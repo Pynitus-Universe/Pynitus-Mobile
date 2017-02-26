@@ -1,45 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
 
-import { Album } from './models';
+import { Album, APIAlbum, albumsFromApiResponse } from './models';
 
 @Injectable()
 export class AlbumService {
+  constructor(private http: Http) {};
+
+  private albumsUrl = 'http://127.0.0.1:5000/albums/all';
+
   getAlbums(): Promise<Album[]> {
-    return Promise.resolve([
-      {
-        id: 1,
-        title: 'Rosenrot',
-        cover: 'covers/rammstein-rosenrot.jpg',
-        artist: {
-          id: 1,
-          name: 'Rammstein'
-        },
-      },
-      {
-        id: 2,
-        title: 'The Sound of Madness',
-        cover: 'covers/shinedown-second_chance.png',
-        artist: {
-          id: 2,
-          name: 'Shinedown'
-        },
-      },
-      {
-        id: 3,
-        title: 'Wait and Bleed',
-        cover: 'covers/slipknot-wait_and_bleed.jpg',
-        artist: {
-          id: 3,
-          name: 'Slipknot'
-        },
-      },
-    ]);
+    return this.http.get(this.albumsUrl)
+                    .toPromise()
+                    .then(response => albumsFromApiResponse(response.json() as APIAlbum[]))
+                    .catch(this.handleError);
   }
 
-  getAlbumsSlowly(): Promise<Album[]> {
-    return new Promise(resolve => {
-      // Simulate server latency with 2 second delay
-      setTimeout(() => resolve(this.getAlbums()), 500);
-    });
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
   }
 }

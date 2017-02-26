@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Track, MediaListItem } from './models';
+import { Track, MediaListItem, asMediaListItems } from './models';
 import { TrackService } from './track.service';
 
 @Component({
@@ -13,18 +13,8 @@ export class TracksComponent implements OnInit  {
   list: MediaListItem[] = [];
 
   ngOnInit(): void {
-    this.trackService.getTracksSlowly().then((tracks: Track[]) => {
-      for(var key in tracks) {
-        var track = tracks[key];
-
-        this.list.push({
-          id: track.id,
-          title: track.title,
-          subtitle: track.album.artist.name,
-          img: track.album.cover,
-        });
-      }
-    });
+    this.trackService.getTracks()
+    .then((tracks: Track[]) => this.list = asMediaListItems(tracks));
   }
 
   onNotifyMainClick(id:number):void {
