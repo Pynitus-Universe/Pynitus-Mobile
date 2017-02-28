@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i|Ubuntu:400,400i,700,700i');
 
 body {
-  padding-top: 5rem;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -14,6 +13,14 @@ button[data-target="#player"] {
     background-image: url(shinedown-second_chance.png);
     background-size: 40px;
     background-repeat: no-repeat;
+}
+
+.content {
+  margin-top: 5rem;
+}
+
+.content.no-navbar {
+  margin-top: 0;
 }
 
 .content {

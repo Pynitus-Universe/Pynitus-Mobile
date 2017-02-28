@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
+import 'rxjs/add/operator/toPromise';
+
 import { Track, APITrack, tracksFromApiResponse } from './models';
+import { logApiError } from './error.component';
 
 @Injectable()
 export class TrackService {
@@ -13,11 +16,6 @@ export class TrackService {
     return this.http.get(this.tracksUrl)
                     .toPromise()
                     .then(response => tracksFromApiResponse(response.json() as APITrack[]))
-                    .catch(this.handleError);
-  }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+                    .catch(logApiError);
   }
 }

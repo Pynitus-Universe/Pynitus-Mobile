@@ -13,11 +13,21 @@ export class PynitusComponent implements OnInit {
   isPlayerCollapsed: boolean = true;
   isNavigationCollapsed: boolean = true;
 
-  titles: any = {
+  isNavbarVisible: boolean = true;
+
+  pathTitles: any = {
     '/artists': 'Artists',
     '/albums': 'Albums',
     '/tracks': 'Tracks',
-    '/upload': 'Upload'
+    '/upload': 'Upload',
+    '/error': 'Error'
+  };
+  pathNavbarVisible: any = {
+    '/artists': true,
+    '/albums': true,
+    '/tracks': true,
+    '/upload': true,
+    '/error': false
   };
   heading: String = '';
 
@@ -29,17 +39,29 @@ export class PynitusComponent implements OnInit {
     this.isNavigationCollapsed = !this.isNavigationCollapsed;
   }
 
+  startsWithPath(arr: {}, key: string): any {
+    for(let path in arr)
+      if(key.startsWith(path))
+        return arr[path];
+    return null;
+  }
+
   ngOnInit() {
     this.router.events.subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          if(this.router.url in this.titles) {
-            var title = this.titles[this.router.url];
+          var title = this.startsWithPath(this.pathTitles, this.router.url);
+          var isVisible = this.startsWithPath(this.pathNavbarVisible, this.router.url);
 
-            if(title !== undefined) {
-              this.title.setTitle(title);
-              this.heading = title;
-            }
-          }
+          if(title === null)
+            title = 'Unknown';
+
+          this.title.setTitle(title);
+          this.heading = title;
+
+          if(isVisible === null)
+            isVisible = true;
+
+          this.isNavbarVisible = isVisible;
         }
     });
   }

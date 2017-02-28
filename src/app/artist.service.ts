@@ -4,6 +4,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Artist, APIArtist, artistsFromApiResponse } from './models';
+import { logApiError } from './error.component';
 
 @Injectable()
 export class ArtistService {
@@ -15,11 +16,7 @@ export class ArtistService {
     return this.http.get(this.artistsUrl)
                     .toPromise()
                     .then(response => artistsFromApiResponse(response.json() as APIArtist[]))
-                    .catch(this.handleError);
+                    .catch(logApiError);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
 }

@@ -12,6 +12,7 @@ import { AlbumsComponent }  from './albums.component';
 import { TracksComponent }  from './tracks.component';
 
 import { UploadComponent }  from './upload.component';
+import { ErrorComponent }  from './error.component';
 
 import { MediaListComponent }  from './media-list.component';
 
@@ -37,6 +38,10 @@ import { MediaListComponent }  from './media-list.component';
         component: UploadComponent
       },
       {
+        path: 'error',
+        component: ErrorComponent
+      },
+      {
         path: '',
         redirectTo: '/tracks',
         pathMatch: 'full'
@@ -50,6 +55,7 @@ import { MediaListComponent }  from './media-list.component';
   	AlbumsComponent,
   	TracksComponent,
     UploadComponent,
+    ErrorComponent,
     MediaListComponent,
   ],
   bootstrap:    [ PynitusComponent ]

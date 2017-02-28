@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
+import 'rxjs/add/operator/toPromise';
+
 import { Album, APIAlbum, albumsFromApiResponse } from './models';
+import { logApiError } from './error.component';
 
 @Injectable()
 export class AlbumService {
@@ -13,11 +16,7 @@ export class AlbumService {
     return this.http.get(this.albumsUrl)
                     .toPromise()
                     .then(response => albumsFromApiResponse(response.json() as APIAlbum[]))
-                    .catch(this.handleError);
+                    .catch(logApiError);
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
 }

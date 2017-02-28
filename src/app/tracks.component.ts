@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Track, MediaListItem, asMediaListItems } from './models';
 import { TrackService } from './track.service';
+
+import { fatalError } from './error.component';
 
 @Component({
   templateUrl: './app/tracks.component.html',
@@ -8,13 +12,15 @@ import { TrackService } from './track.service';
 })
 
 export class TracksComponent implements OnInit  {
-  constructor(private trackService: TrackService) {}
+  constructor(private router: Router, private trackService: TrackService) {}
 
   list: MediaListItem[] = [];
 
   ngOnInit(): void {
     this.trackService.getTracks()
-    .then((tracks: Track[]) => this.list = asMediaListItems(tracks));
+      .then(
+        (tracks: Track[]) => this.list = asMediaListItems(tracks),
+        (error: any)      => fatalError(this.router, error));
   }
 
   onNotifyMainClick(id:number):void {
