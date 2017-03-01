@@ -126,13 +126,23 @@ hr.track-divider {
 }
 
 .track .info {
-  float: left;
+  position: absolute;
+  left: 58px;
+  top: 0;
+  right: 0;
   padding: 8px 10px;
   color: black;
 }
 
 #player .track .info {
   color: #E8E8E8;
+}
+
+.track .info .title,
+.track .info .artist {
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
 }
 
 .track .info .title {
